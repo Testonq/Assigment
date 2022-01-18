@@ -1,0 +1,59 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 HelveticaNeue-Bold;\f2\fnil\fcharset0 HelveticaNeue;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red63\green63\blue63;
+\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c1\c1;\cssrgb\c100000\c100000\c99941;\cssrgb\c31373\c31373\c31373;
+\cssrgb\c100000\c100000\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16760\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 M\cf2 ethod 1 to execute the collection via terminal\
+\
+Prerequisites -\
+\
+You need node.js install on your machine. Can be Downloaded via {\field{\*\fldinst{HYPERLINK "https://www.youtube.com/redirect?q=https%3A%2F%2Fnodejs.org%2Fen%2Fdownload%2F&redir_token=MdUSsRqoEt159uXE3ZZxrJbEPCl8MTU3NDQyMDAwM0AxNTc0MzMzNjAz&event=video_description&v=f2yMmOGZU7M"}}{\fldrslt 
+\f1\b\fs26 \cb3 https://nodejs.org/en/download/}}
+\f1\b\fs26 \cb3  
+\f2\b0 (select automatically install necessary tools option)\
+\
+Approach -\
+My plan is to save city names on a csv file and get city name inputs into the script dynamically. City data can be update on csv file.\
+\
+Or \
+City can be update via environment files. (Just to initiate testing I have provided \'92
+\f0\fs24 \cf4 \cb5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Nottingham
+\f2\fs26 \cf2 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \'92 as the city name.
+\f1\b \cb1 \
+\
+\
+Step 1\
+Check node js available , run command - node -v\
+Step 2\
+Install Newman to run the collection, run command - npm install -g Newman\
+Step 3\
+Save collection and environment files (script files)\
+Step 4\
+Go to file saved locations via cmd , run command -  cd <file saved location> (ex - cd documents/\'91folder name\'92\
+Step 5\
+Execute the test scripts (test collection script , environment file, city data file) , run command - Newman run weather system.postman_collection.json -e Assignment.postman_environment.json -d citydatafile.csv -n 4 \
+\
+-n > required iterations count\
+\
+\
+Else \
+please download postman https://www.postman.com/downloads/\
+\
+Steps to execute via postman.\
+\
+\
+Step 1 -\
+Save the collection and environment script files on your local machine.\
+Step 2-\
+Open postman and import the collection and environment script files by \'91import\'92 option on the postman top menu\
+Step 3\
+Run the collection (find collection menu arrow icon and click on \'91RUN\'92 \
+(citydatafile.csv data file can be upload during Run)\
+\
+}

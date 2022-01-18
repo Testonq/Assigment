@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "59c837a0-411d-4ab0-8693-0383e19c523b",
+		"name": "weather system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get woeid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = JSON.parse(responseBody);",
+							"pm.environment.set(\"woeid\", res[0][\"woeid\"]);",
+							"",
+							"pm.test(\"Given city in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var city = pm.environment.get(\"city\");",
+							"    pm.expect(jsonData[0].title).to.eql(city);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/location/search/?query={{city}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"location",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "{{city}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET tomorrow weather",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var jsonData = pm.response.json();",
+							"pm.test(\"Required date in the response\", function () {",
+							"    var moment = require('moment');",
+							"    var tomodate=moment().add(1,'d').format((\"YYYY-MM-DD\"))",
+							"    pm.expect(jsonData[0].applicable_date).to.eql(tomodate);",
+							"});",
+							"pm.test('all properties validated', function (){",
+							"   //var jsonData = pm.response.json(); ",
+							"  pm.expect(jsonData[0]).to.have.property('weather_state_name');",
+							"  pm.expect(jsonData[0]).to.have.property('weather_state_abbr');",
+							"  pm.expect(jsonData[0]).to.have.property('wind_direction_compass');",
+							"  pm.expect(jsonData[0]).to.have.property('created');",
+							"  pm.expect(jsonData[0]).to.have.property('applicable_date');",
+							"  pm.expect(jsonData[0]).to.have.property('min_temp');",
+							"  pm.expect(jsonData[0]).to.have.property('max_temp');",
+							"  pm.expect(jsonData[0]).to.have.property('the_temp');",
+							"  pm.expect(jsonData[0]).to.have.property('wind_speed');",
+							"  pm.expect(jsonData[0]).to.have.property('wind_direction');",
+							"  pm.expect(jsonData[0]).to.have.property('air_pressure');",
+							"  pm.expect(jsonData[0]).to.have.property('humidity');",
+							"  pm.expect(jsonData[0]).to.have.property('visibility');",
+							"  pm.expect(jsonData[0]).to.have.property('predictability');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get the tomorrow date and save in the environment variable 'tomorrowdate'",
+							"var moment = require('moment');",
+							"pm.environment.set('tomorrowdate', moment().add(1,'d').format((\"YYYY/MM/DD\")));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/location/{{woeid}}/{{tomorrowdate}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"location",
+						"{{woeid}}",
+						"{{tomorrowdate}}",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
